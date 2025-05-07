@@ -27,6 +27,7 @@ public class Menu {
 			System.out.println("            3 - Buscar Produto pelo seu ID           ");
 			System.out.println("            4 - Atualizar Dados de um produto        ");
 			System.out.println("            5 - Retirar um Produto do Catalogo       ");
+			System.out.println("            6 - Listar Produtos por Marca            ");
 			System.out.println("            0 - Sair                                 ");
 			System.out.println("                                                     ");
 			System.out.println("*****************************************************");
