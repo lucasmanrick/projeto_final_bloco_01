@@ -73,6 +73,20 @@ public class ProdutoController implements ProdutoRepository{
 		
 	}
 
+	
+	@Override
+	public void listarPorCategoria(String categoria) {
+		List<Produto> found = bdProdutos.stream()
+				.filter(p -> p.getmarca().toUpperCase().contains(categoria.toUpperCase()))
+				.collect(Collectors.toList());
+				
+				if(found.isEmpty()) {
+					System.out.println("Não foi identificado nenhum produto com o id especificado.");
+				}
+				found.forEach(e -> e.visualizarDadosDoProduto());
+		
+	}
+	
 	@Override
 	public Optional<Produto> buscarProdutoNoBd(int num) {
 		Optional<Produto> found = bdProdutos.stream()
