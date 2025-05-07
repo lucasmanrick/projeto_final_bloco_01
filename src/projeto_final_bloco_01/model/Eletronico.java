@@ -1,10 +1,10 @@
 package projeto_final_bloco_01.model;
 
-public class Eletronicos extends Produto {
+public class Eletronico extends Produto {
 	String finalidade;
 	String usabilidade;
 	
-	public Eletronicos(int id, int preco, String marca, String categoria, String caracteristicas,String finalidade,String usabilidade) {
+	public Eletronico(int id, int preco, String marca, String categoria, String caracteristicas,String finalidade,String usabilidade) {
 		super(id, preco, marca, categoria, caracteristicas);
 		this.finalidade = finalidade;
 		this.usabilidade = usabilidade;

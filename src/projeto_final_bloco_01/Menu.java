@@ -3,6 +3,8 @@ package projeto_final_bloco_01;
 import java.io.IOException;
 import java.util.Scanner;
 
+import projeto_final_bloco_01.model.Eletronico;
+import projeto_final_bloco_01.model.Mobilia;
 import projeto_final_bloco_01.util.Cores;
 
 public class Menu {
@@ -10,7 +12,14 @@ public class Menu {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner leia = new Scanner(System.in);
+		
+		Eletronico novoProduto = new Eletronico(1,20,"reddragon","Teclado mecanico", "teclado leve, baixo custo com rgb e apoio de digitação", "gamer", "plugavel" );
 
+		novoProduto.visualizarDadosDoProduto();
+		
+		Mobilia novoProdutoMobilia = new Mobilia(1,20,"mobilia mobilia","Sofa", "Sofa confortavel, vira cama, inclui travesseiros 100% feito em pena",1.8,1.2,1.2, 50);
+		
+		novoProdutoMobilia.visualizarDadosDoProduto();
 		int opcao;
 
 		while (true) {
