@@ -11,6 +11,7 @@ public interface ProdutoRepository {
 	public void atualizar(int numero, Produto Produto);
 	public void deletar	 (int numero);
 	public void listarPorMarca (String marca);
+	public void listarPorCategoria (String categoria);
 	
 	
 	public Optional<Produto> buscarProdutoNoBd (int num);

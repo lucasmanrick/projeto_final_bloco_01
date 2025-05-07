@@ -41,6 +41,7 @@ public class Menu {
 			System.out.println("            4 - Atualizar Dados de um produto        ");
 			System.out.println("            5 - Retirar um Produto do Catalogo       ");
 			System.out.println("            6 - Listar Produtos por Marca            ");
+			System.out.println("            7 - Listar Produtos pela sua Categoria   ");
 			System.out.println("            0 - Sair                                 ");
 			System.out.println("                                                     ");
 			System.out.println("*****************************************************");
@@ -174,6 +175,26 @@ public class Menu {
 				System.out.println("Digite o id do produto:");
 				identificador = leia.nextInt();
 				crudReceive.deletar(identificador);
+				keyPress();
+				break;
+				
+			case 6: 
+				System.out.println("Listar Produtos por marca (Kabum, Reddragon, Mobilia Mobilia)");
+				System.out.println("Digite a marca dos produtos que você deseja filtrar");
+				leia.skip("\\R");
+				marca = leia.nextLine();
+				
+				crudReceive.listarPorMarca(marca);
+				keyPress();
+				break;
+				
+			case 7:
+				System.out.println("Listar Produtos por categoria (mouse, sofa, cama)");
+				System.out.println("Digite a categoria dos produtos que você deseja encontrar");
+				leia.skip("\\R");
+				categoria = leia.nextLine();
+				
+				crudReceive.listarPorCategoria(categoria);
 				keyPress();
 				break;
 			default:
