@@ -4,8 +4,8 @@ public class Eletronico extends Produto {
 	String finalidade;
 	String usabilidade;
 	
-	public Eletronico(int id, int preco, String marca, String categoria, String caracteristicas,String finalidade,String usabilidade) {
-		super(id, preco, marca, categoria, caracteristicas);
+	public Eletronico(int id, double preco, String marca, String categoria, String caracteristicas,int tipoProd,String finalidade,String usabilidade) {
+		super(id, preco, marca, categoria, caracteristicas,tipoProd);
 		this.finalidade = finalidade;
 		this.usabilidade = usabilidade;
 	}

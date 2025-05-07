@@ -1,10 +1,13 @@
 package projeto_final_bloco_01;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.Scanner;
 
+import projeto_final_bloco_01.controller.ProdutoController;
 import projeto_final_bloco_01.model.Eletronico;
 import projeto_final_bloco_01.model.Mobilia;
+import projeto_final_bloco_01.model.Produto;
 import projeto_final_bloco_01.util.Cores;
 
 public class Menu {
@@ -12,14 +15,15 @@ public class Menu {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner leia = new Scanner(System.in);
+	
 		
-		Eletronico novoProduto = new Eletronico(1,20,"reddragon","Teclado mecanico", "teclado leve, baixo custo com rgb e apoio de digitação", "gamer", "plugavel" );
-
-		novoProduto.visualizarDadosDoProduto();
+		ProdutoController crudReceive = new ProdutoController();
 		
-		Mobilia novoProdutoMobilia = new Mobilia(1,20,"mobilia mobilia","Sofa", "Sofa confortavel, vira cama, inclui travesseiros 100% feito em pena",1.8,1.2,1.2, 50);
+		String marca,categoria,caracteristicas,finalidade,usabilidade;
+		int tipo,identificador;
+		double largura,altura,profundidade,peso,preco;
 		
-		novoProdutoMobilia.visualizarDadosDoProduto();
+		
 		int opcao;
 
 		while (true) {
@@ -55,26 +59,121 @@ public class Menu {
 			switch (opcao) {
 			case 1:
 				System.out.println(Cores.TEXT_WHITE + "Cadastrando novo Produto \n\n");
-
+				System.out.println("Digite o tipo de produto que você deseja cadastrar: \n 1 - Eletronico \n 2 - Mobilia");
+				tipo = leia.nextInt();
+				System.out.println("Digite a marca do produto: ");
+				leia.skip("\\R");
+				marca = leia.nextLine();
+				System.out.println("Digite o preço do produto: ");
+				preco = leia.nextDouble();
+				System.out.println("Digite a categoria do produto (por exemplo: mouse, teclado ou sofá, cama)");
+				leia.skip("\\R");
+				categoria = leia.nextLine();
+				System.out.println("Digite as caracteristicas do produto: (ex: produto na cor preta,vermelha e azul, inclui funcionalidade rgb e etc.)");
+				caracteristicas = leia.nextLine();
+				
+				switch (tipo) {
+					case 1 : 
+						System.out.println("Digite a finalidade do produto (gamer, trabalho, normal)");
+						finalidade = leia.nextLine();
+						System.out.println("Digite a usabilidade do produto (bateria, plugavel)");
+						usabilidade = leia.nextLine();
+						Eletronico novoProdutoEletronico = new Eletronico(crudReceive.gerarID(),preco,marca,categoria,caracteristicas,tipo,finalidade,usabilidade);
+						crudReceive.cadastrar(novoProdutoEletronico);
+						break;
+					case 2:
+						System.out.println("Digite a largura do produto:");
+						largura = leia.nextDouble();
+						System.out.println("Digite a altura do produto: ");
+						altura = leia.nextDouble();
+						System.out.println("Digite a profundidade do produto: ");
+						profundidade = leia.nextDouble();
+						System.out.println("Digite o peso do produto: ");
+						peso = leia.nextDouble();
+						Mobilia novoProdutoMobilia= new Mobilia(crudReceive.gerarID(),preco,marca,categoria,caracteristicas,tipo,largura,altura,profundidade,peso);
+						crudReceive.cadastrar(novoProdutoMobilia);
+						break;
+						default: 
+							System.out.println("Opção invalida!");
+				}
 				keyPress();
 				break;
 			case 2:
 				System.out.println(Cores.TEXT_WHITE + "Listando todos Produtos cadastrados \n\n");
-
+				crudReceive.listarTodas();
 				keyPress();
 				break;
 			case 3:
 				System.out.println(Cores.TEXT_WHITE + "Listando informações de um produto especifico\n\n");
-
+				System.out.println("Digite o id do produto:");
+				identificador = leia.nextInt();
+				
+				crudReceive.procurarPorId(identificador);
+				
 				keyPress();
 				break;
 			case 4:
 				System.out.println(Cores.TEXT_WHITE + "Atualizando dados de um produto\n\n");
-
+				System.out.println("Digite o id do produto:");
+				identificador = leia.nextInt();
+				
+				Optional<Produto> verificandoExistencia = crudReceive.buscarProdutoNoBd(identificador);
+				
+				if(verificandoExistencia.isPresent()) {
+					if(verificandoExistencia.get().gettipoProd() == 1) {
+						System.out.println(Cores.TEXT_WHITE + "Produto encontrado, atualizando dados do Produto \n\n");
+						System.out.println("Digite o tipo de produto que você deseja cadastrar: \n 1 - Eletronico \n 2 - Mobilia");
+						tipo = leia.nextInt();
+						System.out.println("Digite a marca do produto: ");
+						leia.skip("\\R");
+						marca = leia.nextLine();
+						System.out.println("Digite o preço do produto: ");
+						preco = leia.nextDouble();
+						System.out.println("Digite a categoria do produto (por exemplo: mouse, teclado)");
+						leia.skip("\\R");
+						categoria = leia.nextLine();
+						System.out.println("Digite as caracteristicas do produto: (ex: produto na cor preta,vermelha e azul, inclui funcionalidade rgb e etc.)");
+						caracteristicas = leia.nextLine();
+						System.out.println("Digite a finalidade do produto (gamer, trabalho, normal)");
+						finalidade = leia.nextLine();
+						System.out.println("Digite a usabilidade do produto (bateria, plugavel)");
+						usabilidade = leia.nextLine();
+						Eletronico novoProdutoEletronico = new Eletronico(identificador,preco,marca,categoria,caracteristicas,tipo,finalidade,usabilidade);
+						crudReceive.atualizar(identificador, novoProdutoEletronico);
+					}else if (verificandoExistencia.get().gettipoProd() == 2) {
+						System.out.println(Cores.TEXT_WHITE + "Cadastrando novo Produto \n\n");
+						System.out.println("Digite o tipo de produto que você deseja cadastrar: \n 1 - Eletronico \n 2 - Mobilia");
+						tipo = leia.nextInt();
+						System.out.println("Digite a marca do produto: ");
+						leia.skip("\\R");
+						marca = leia.nextLine();
+						System.out.println("Digite o preço do produto: ");
+						preco = leia.nextDouble();
+						System.out.println("Digite a categoria do produto (por exemplo: mouse, teclado)");
+						leia.skip("\\R");
+						categoria = leia.nextLine();
+						System.out.println("Digite as caracteristicas do produto: (ex: produto na cor preta,vermelha e azul, inclui funcionalidade rgb e etc.)");
+						caracteristicas = leia.nextLine();
+						System.out.println("Digite a largura do produto:");
+						largura = leia.nextDouble();
+						System.out.println("Digite a altura do produto: ");
+						altura = leia.nextDouble();
+						System.out.println("Digite a profundidade do produto: ");
+						profundidade = leia.nextDouble();
+						System.out.println("Digite o peso do produto: ");
+						peso = leia.nextDouble();
+						Mobilia novoProdutoMobilia= new Mobilia(crudReceive.gerarID(),preco,marca,categoria,caracteristicas,tipo,largura,altura,profundidade,peso);
+						crudReceive.atualizar(identificador,novoProdutoMobilia);
+					}
+//					
+				}
 				keyPress();
 				break;
 			case 5:
 				System.out.println(Cores.TEXT_WHITE + "Removendo um produto do catalogo\n\n");
+				System.out.println("Digite o id do produto:");
+				identificador = leia.nextInt();
+				crudReceive.deletar(identificador);
 				keyPress();
 				break;
 			default:

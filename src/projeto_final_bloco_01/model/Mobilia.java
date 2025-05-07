@@ -8,8 +8,8 @@ public class Mobilia extends Produto{
 	private double peso;
 	
 	
-	public Mobilia(int id, int preco, String marca, String categoria, String caracteristicas, double largura, double altura, double profundidade, double peso) {
-		super(id, preco, marca, categoria, caracteristicas);
+	public Mobilia(int id, double preco, String marca, String categoria, String caracteristicas,int tipoProd, double largura, double altura, double profundidade, double peso) {
+		super(id, preco, marca, categoria, caracteristicas, tipoProd);
 		this.largura = largura;
 		this.altura = altura;
 		this.profundidade = profundidade;

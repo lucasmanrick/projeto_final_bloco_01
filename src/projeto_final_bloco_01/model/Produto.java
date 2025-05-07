@@ -6,17 +6,18 @@ public abstract class Produto {
 	private String marca;
 	private String categoria;
 	private String caracteristicas;
-	private int preco;
+	private double preco;
+	private int tipoProd;
 	
-	public Produto(int id,int preco,String marca, String categoria, String caracteristicas) {
+	public Produto(int id,double preco,String marca, String categoria, String caracteristicas, int tipoProd) {
 		this.id = id;
 		this.preco = preco;
 		this.marca = marca;
 		this.categoria = categoria;
 		this.caracteristicas = caracteristicas;
-		
+		this.tipoProd = tipoProd;
 	}
-	public int getPreco() {
+	public double getPreco() {
 		return preco;
 	}
 	public void setPreco(int preco) {
@@ -46,6 +47,12 @@ public abstract class Produto {
 	}
 	public void setcaracteristicas(String caracteristicas) {
 		this.caracteristicas = caracteristicas;
+	}
+	public int gettipoProd() {
+		return this.tipoProd;
+	}
+	public void settipoProd(int tipoProd) {
+		this.tipoProd = tipoProd;
 	}
 	
 	
